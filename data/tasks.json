@@ -1,0 +1,33 @@
+[
+    {
+        "description": "Grow Mtb in culture at saturation OD",
+        
+    },
+    {
+        "description": "Collect the media from Mtb culture filtrate and lyophilize"
+    },
+    {
+        "description": "Fractionate the lyophylized filtrate accoeding to size, hydrophobic nature of proteins and peptides"
+    },
+    {
+        "description": "Do mass spectrometry and identify the proteins and peptide sequence'"
+    },
+    {
+        "description": "Define most abundant protein or peptide followed by its expression/synthesis"
+    },
+    {
+        "description": "Add the synthesized peptide/protein to macrophagre cell culture and study cell phenotype"
+    },
+    {
+        "description": "Collect the macrophages for different period of time after trearment by protein/peptide"
+    },
+    {
+        "description": "Fractionate cells and collect cytosolic proteins, nucleus and membranes"
+    },
+    {
+        "description": "Prepare DNA and RNA samples from treated cells and study the base modifications by massspectrometery"
+    },
+    {
+        "description": "Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein"
+    }
+]

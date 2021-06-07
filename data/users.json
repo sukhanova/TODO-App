@@ -1,0 +1,37 @@
+[
+    {
+        "fname": "Neeraj",
+        "lname": "Mishra",
+        "username": "nkmishra",
+        "email": "nkmishra@gmail.com",
+        "password" : "nkmishratest"
+    },
+    {
+        "fname": "Subho",
+        "lname": "Panda",
+        "username": "spanda",
+        "email": "spanda@gmail.com",
+        "password" : "spandatest"
+    },
+    {
+        "fname": "Sachin",
+        "lname": "Sharma",
+        "username": "ssharma",
+        "email": "ssharma@gmail.com",
+        "password" : "ssharmatest"
+    },
+    {
+        "fname": "Moyo",
+        "lname": "Olomoye",
+        "username": "moyosore",
+        "email": "moyosore@gmail.com",
+        "password" : "smoyosoretest"
+    },
+    {
+        "fname": "Kaya",
+        "lname": "Berg",
+        "username": "kberg",
+        "email": "kberg@gmail.com",
+        "password" : "kbergtest"
+    }
+]
