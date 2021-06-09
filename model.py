@@ -60,7 +60,7 @@ class Task(db.Model):
                    autoincrement=True, 
                    primary_key=True)
     description = db.Column(db.String)
-    created_at = db.Column(db.DateTime, index=True, default=datetime.cstnow)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.now())
     finished_at = db.Column(db.DateTime, index=True, default=None)
     is_finished = db.Column(db.Boolean, default=False)
     creator = db.Column(db.String, db.ForeignKey("users.username"))
