@@ -47,7 +47,7 @@ class Project(db.Model):
         self.title = title or "untitled"
         self.description = description or "untitled"
         self.creator = creator
-        self.start_date = start_date or datetime.cstnow()
+        self.start_date = start_date or datetime.now()
 
     def __repr__(self):
         return f"<Project: {self.title} Description:{self.description} Start: {self.start_date}>"
@@ -68,7 +68,7 @@ class Task(db.Model):
 
     def __init__(self, description, created_at=None, project_id=None, creator=None):
         self.description = description
-        self.created_at = created_at or datetime.cstnow()
+        self.created_at = created_at or datetime.now()
         self.project_id = project_id
         self.creator = creator
         

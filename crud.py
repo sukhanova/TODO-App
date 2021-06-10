@@ -1,79 +1,92 @@
 """CRUD-related functions"""
-import random
-# from datetime import datetime
+from datetime import datetime
 from model import db, User, Project, Task, connect_to_db
+    
+def create_user(fname, lname, username, email, password):
+    """Create and return a new user."""
 
-# def create_user(fname, lname, username, email, password):
-#     """Create and return new user."""
-    
-#     user = User(fname=fname,
-#                 lname=lname,
-#                 username=username,
-#                 email=email,
-#                 password=password)
-    
-#     db.session.add(user)
-#     db.session.commit()
-    
-#     return user
+    user = User(fname=fname,
+                lname=lname,
+                username=username,
+                email=email,
+                password=password)
 
-# def create_project(title, description, start_date):
-#     """Create and return a project."""
-    
-#     project = Project(title=title,
-#                       description=description,
-#                       start_date=start_date)
-    
-    
-# def create_task(description, )
+    db.session.add(user)
+    db.session.commit()
 
-class DataGenerator:
-    def __init__(self):
-        db.drop_all()
-        db.create_all()
-        
-    def create_users(self, count):
-        for _ in range(count):
-            User(
-                fnane=forgery_py.name.first_name(),
-                lname=forgery_py.name.last_name(),
-                username=forgery_py.internet.user_name(True),
-                email=forgery_py.internet.email_address(),
-                password="todoapptest",
-            ).save()
-               
-    # def create_projects(self, count):
-    #     # for creator relations in db 
-    #     users = Users.query.all()
-    #     assert users !=[]
-    #     for _ in range(count):
-    #         Project(
-    #             title=title,
-    #             description=description,
-    #             start_date=start_date
-    #             creator=random.choice(users).username
-    #         ).save()
-            
-    # def create_tasks(sel, count):
-    #     # for project relations in db
-    #     projects = Project.query.all()
-    #     assert projects !=[]
-    #     for _ in range(count):
-    #         project = random.choice(projects)
-    #         task=Task(
-    #             description=description,
-    #             created_at=self.generate_fake_date().save()
-    #             creator=project.creator,
-    #             project_id=project_id
-    #         ) .save()
-            
+    return user
+
+
+def get_user_by_email(email):
+    """Return a user by email."""
+
+    return User.query.filter(User.email == email).first()
+
     
-    def generate_data(self, count):
-        self.create_users(count)
-        # self.create_projects(count *3)
-        # self.create_tasks(count *12)   
+def check_user_login_info(email, password):
+    """Return users email and password match in database"""
     
+    return User.query.filter((User.email == email) & (User.password == password)).first()
+
+
+def get_all_users(): 
+    """Returns all Users"""
+
+    return User.query.all()
+
+
+def get_user_info(user_id):
+    """Returns user details"""
+    return User.query.get(user_id)
+
+
+def create_project(title, description, start_date):
+    """Create and return a new project."""
     
+    project = Project(title=title, 
+                      description=description, 
+                      start_date=start_date)
+    
+    db.session.add(project)
+    db.session.commit()
+
+    return project
+
+
+def get_all_projects():
+    """Return all projects."""
+
+    return Project.query.all()
+
+
+def get_project_by_id(project_id):
+    """Return project by id"""
+    
+    return Project.query.get(project_id)
+
+
+def create_task(description, created_at=datetime.now(), is_finished=False):
+    """Create and return a new task."""
+    
+    task = Task(description=description)
+    
+    db.session.add(task)
+    db.session.commit()
+
+    return task
+
+
+def get_all_tasks():
+    """Return all tasks."""
+
+    return Task.query.all()
+
+
+def get_task_by_id(task_id):
+    """Return task by id"""
+    
+    return Task.query.get(task_id)
+
 
 if __name__ == '__main__':
     from server import app
