@@ -36,7 +36,7 @@ class Project(db.Model):
     id = db.Column(db.Integer, 
                    autoincrement=True, 
                    primary_key=True)
-    title = db.Column(db.String)
+    title = db.Column(db.String(255))
     description = db.Column(db.String)
     start_date = db.Column(db.DateTime)
     creator = db.Column(db.String, db.ForeignKey("users.username"))
@@ -59,7 +59,7 @@ class Task(db.Model):
     id = db.Column(db.Integer, 
                    autoincrement=True, 
                    primary_key=True)
-    description = db.Column(db.String)
+    description = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, index=True, default=datetime.now())
     finished_at = db.Column(db.DateTime, index=True, default=None)
     is_finished = db.Column(db.Boolean, default=False)
@@ -83,7 +83,7 @@ class Task(db.Model):
 
     def finished(self):
         self.is_finished = True
-        self.finished_at = datetime.cstnow()
+        self.finished_at = datetime.now()
         self.save()
 
 
