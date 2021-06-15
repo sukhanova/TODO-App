@@ -21,6 +21,12 @@ def index():
     return "<html><body>Placeholder for the homepage.</body></html>"
 
 
+@app.route('/welcome')
+def say_hello():
+    """Welcome user and get first and last name."""
+
+    return render_template("homepage.html")
+
 
 if __name__ == '__main__':
     connect_to_db(app)

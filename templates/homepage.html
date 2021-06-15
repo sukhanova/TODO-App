@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block body %}
+
+<section>
+
+  <h1>Welcome to Projects Todo List</h1>
+
+</section>
+
+<main>
+
+  <form action="/greet">
+    <label>What's your first name? <input type="text" name="fname"></label>
+    <label>What's your last name? <input type="text" name="lname"></label>
+    <input type="submit">
+  </form>
+
+</main>
+
+{% endblock %}
