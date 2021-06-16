@@ -1,9 +1,9 @@
 """Models for todo app."""
 
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy() 
+db = SQLAlchemy()
 
 ##############################################################################
 # Model definitions
@@ -26,6 +26,7 @@ class User(db.Model):
     
     def __repr__(self):
         return f'<User user_id={self.user_id} fname={self.fname} lname={self.lname} username={self.username} email={self.email}>'
+
     
     
 class Project(db.Model):
@@ -52,48 +53,31 @@ class Project(db.Model):
     def __repr__(self):
         return f"<Project: {self.title} Description:{self.description} Start: {self.start_date}>"
     
+
     
 class Task(db.Model):
-    __tablename__ = "task"
+    """A task."""
+    
+    __tablename__ = "tasks"
     
     id = db.Column(db.Integer, 
                    autoincrement=True, 
                    primary_key=True)
-    description = db.Column(db.String(255))
-    created_at = db.Column(db.DateTime, index=True, default=datetime.now())
-    finished_at = db.Column(db.DateTime, index=True, default=None)
-    is_finished = db.Column(db.Boolean, default=False)
-    creator = db.Column(db.String, db.ForeignKey("users.username"))
+    description = db.Column(db.String)
+    done = db.Column(db.Boolean)
+    pub_date = db.Column(db.DateTime)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.id"))
 
-    def __init__(self, description, created_at=None, project_id=None, creator=None):
-        self.description = description
-        self.created_at = created_at or datetime.now()
-        self.project_id = project_id
-        self.creator = creator
+    def __init__(self, title, text):
+        self.title = title
+        self.text = text
+        self.done = False
+        self.pub_date = datetime.now()
         
 
     def __repr__(self):
-        return f"<{self.status} Task: {self.description} by {self.creator or None}>"
+        return f"<{self.id} Task: {self.title}"
 
-
-    @property
-    def status(self):
-        return "finished" if self.is_finished else "open"
-
-    def finished(self):
-        self.is_finished = True
-        self.finished_at = datetime.now()
-        self.save()
-
-
-    def to_dict(self):
-        return {
-            "description": self.description,
-            "creator": self.creator,
-            "created_at": self.created_at,
-            "status": self.status,
-        }
 
 ##############################################################################
 # Helper functions

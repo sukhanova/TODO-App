@@ -7,10 +7,7 @@ from jinja2 import StrictUndefined
 
 
 app = Flask(__name__)
-#os.enviorn -> use this to replace the actual key
-#don't forget to run source secrets.sh in terminal!!
 
-# app.secret_key = os.environ['SECRET_KEY']
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
@@ -21,11 +18,34 @@ def index():
     return "<html><body>Placeholder for the homepage.</body></html>"
 
 
-@app.route('/welcome')
+@app.route('/hello')
 def say_hello():
-    """Welcome user and get first and last name."""
+    """Collect users first and last name."""
 
     return render_template("homepage.html")
+
+
+@app.route('/welcome')
+def greet_person():
+    """Greet user by first and last name. Query database to pdisplay existing projects
+    for choice buttons"""
+
+    userFname = request.args.get("fname")
+    userLname = request.args.get("lname")
+
+    new_user = User(fname=userFname, lname=userLname)
+    db.session.add(new_user)
+    db.session.commit()
+
+    projects = Project.query.all()
+    
+
+
+    return render_template("selectProject.html",
+                           personFname=userFname,
+                           personLname=userLname,
+                           projects=projects
+                           )
 
 
 if __name__ == '__main__':
