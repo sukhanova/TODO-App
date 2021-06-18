@@ -8,8 +8,6 @@ db = SQLAlchemy()
 ##############################################################################
 # Model definitions
 
-# Model definitions
-
 class User(db.Model):
     """A user table in task_tracking database."""
 
@@ -70,11 +68,10 @@ class Task(db.Model):
     pub_date = db.Column(db.DateTime)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
 
-    def __init__(self, title, text):
-        self.title = title
-        self.text = text
+    def __init__(self, description, done):
+        self.description = description
         self.done = False
-        self.pub_date = datetime.now()
+        # self.pub_date = date.today()
         
 
     def __repr__(self):

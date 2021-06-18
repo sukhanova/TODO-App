@@ -4,14 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>
-      {% block title %}{% endblock %}
+      {% block title %}
+        Choose ptoject you are working on:
+      {% endblock %}
     </title>
-
     {% block head %}{% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    {% block body %}
+    <section>
+      <h1>Hi {{ personFname }} {{ personLname }}!</h1>
+      <h1>Wich project you are working on?</h1>
+    </section>
 
-    {% block after_body %}{% endblock %}
+    <main>
+      <form action = "/selectProject">
+        {% for project in projects %}
+          <input type="radio" id="{{ project.project_id }}" name="project" value="{{ project.project_id }}">
+          <label for="{{ project.project_id }}">{{ project.project_name }}</label>
+          <p>{{ project.description }}</p>
+          {% for user in project.users %}
+            <p>{{ user.fname}}</p>
+          {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Submit">
+      </form>
+
+    </main>
+    {% endblock %}
   </body>
 </html>
