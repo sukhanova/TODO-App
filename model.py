@@ -8,8 +8,10 @@ db = SQLAlchemy()
 ##############################################################################
 # Model definitions
 
+# Model definitions
+
 class User(db.Model):
-    """A user."""
+    """A user table in task_tracking database."""
 
     __tablename__ = 'users'
 
@@ -30,11 +32,11 @@ class User(db.Model):
     
     
 class Project(db.Model):
-    """A project."""
+    """A project table in task_tracking database."""
     
     __tablename__ = 'projects'
     
-    id = db.Column(db.Integer, 
+    project_id = db.Column(db.Integer, 
                    autoincrement=True, 
                    primary_key=True)
     title = db.Column(db.String(255))
@@ -56,17 +58,17 @@ class Project(db.Model):
 
     
 class Task(db.Model):
-    """A task."""
+    """A task table in task_tracking database."""
     
     __tablename__ = "tasks"
     
-    id = db.Column(db.Integer, 
+    task_id = db.Column(db.Integer, 
                    autoincrement=True, 
                    primary_key=True)
     description = db.Column(db.String)
     done = db.Column(db.Boolean)
     pub_date = db.Column(db.DateTime)
-    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"))
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
 
     def __init__(self, title, text):
         self.title = title
@@ -77,6 +79,22 @@ class Task(db.Model):
 
     def __repr__(self):
         return f"<{self.id} Task: {self.title}"
+    
+    
+class ProjectTask(db.Model):
+    """project_task in task_tracking database."""
+    
+    __tablename__ = "projects_tasks"
+    
+    project_task_id = db.Column(db.Integer, 
+                   autoincrement=True, 
+                   primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
+    task_id = db.Column(db.Integer, db.ForeignKey("tasks.task_id"))
+
+
+    def __repr__(self):
+        return f"<ProjectTask project_task_id={self.project_task_id} project_id={self.project_id} task_id={self.task_id}>"
 
 
 ##############################################################################
