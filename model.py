@@ -97,6 +97,34 @@ class ProjectTask(db.Model):
         return f"<ProjectTask project_task_id={self.project_task_id} project_id={self.project_id} task_id={self.task_id}>"
 
 
+
+class UserTask(db.Model):
+    """users_tasks table in task_tracking database."""
+
+    __tablename__ = "users_tasks"
+
+    user_task_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    task_id = db.Column(db.Integer, db.ForeignKey('tasks.task_id'))
+    
+    def __repr__(self):
+
+        return f"<UserTask user_task_id={self.user_task_id} user_id={self.user_id} task_id={self.task_id}>"
+
+
+class UserProject(db.Model):
+    """users_projects table in task_tracking database."""
+
+    __tablename__ = "users_projects"
+
+    user_project_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.project_id'))
+
+    def __repr__(self):
+
+        return f"<UserProject user_project_id={self.user_project_id} user_id={self.user_id} project_id={self.project_id}>"
+
 ##############################################################################
 # Helper functions
 
