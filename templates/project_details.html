@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+
+Choose Project
+
+{% endblock %}
+
+{% block body %}
+
+<section>
+    <h1>List of existing tasks for the project:</h1>
+    <ul>
+      {% for tasks in project.tasks %}
+      <li>{{ tasks.description }} </li>
+      {% endfor %}
+    </ul>
+    
+</section>
+
+<main>
+
+    <h1>Add task to the project:</h1>
+    <form action="/project_details/{{ project.project_id }}">
+      <p><label> Task: <input type="text" name="task"></label></p>
+      <p><label> Due date: <input type="date" name="pub_date"></label></p>
+      <p><input type="submit"></p>
+    </form>
+
+{% endblock %}

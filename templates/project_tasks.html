@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+
+  Project tasks: 
+
+{% endblock %}
+
+{% block body %}
+
+<section>
+  <h1>Updated list of project tasks, including yours:</h1>
+  <ul>
+    {% for tasks in project.tasks %}
+    <li>{{ tasks.description }} - {{ tasks.pub_date }}</li>
+    {% endfor %}
+  </ul>
+  
+</section>
+
+{% endblock %}

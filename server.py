@@ -55,8 +55,33 @@ def select_project_form():
     
     return render_template("project_details.html", project=project)
     
+   
+@app.route('/project_details/<int:project_id>')
+def add_task(project_id):
+    
+    project = Project.query.get(project_id)
+    task = Task.query.get_all()
+    
+    task_name = request.args.get('task')
+    due_date = request.args.get('date')
+    
+    new_task = Task(description=description,
+                    pub_date=pub_date,
+                    task_id=new_task_id)
+    db.session.add(new_task)
+    db.session.commit()
     
     
+    new_task_id = new_task.task_id
+    new_project_task = ProjectTask()
+    db.session.add(new_project_task)
+    db.session.commit()
+    
+    return render_template("project_tasks.html", 
+                           description=task_name,
+                           pub_date=due_date, 
+                           project=project)
+        
 
 if __name__ == '__main__':
     connect_to_db(app)
