@@ -10,12 +10,20 @@ Choose Project
 
 <section>
 
-<h1>Hi {{ lname }} {{ fname }}!</h1>
+<h1>Hi {{ personFname }} {{ personLname }}!</h1>
 <h1>Wich project you are working on?</h1>
 
 </section>
 
 <main>
+    <form action = "/selectProject">
+        {% for project in projects %}
+          <input type="radio" id="{{ project.project_id }}" name="project" value="{{ project.project_id }}">
+          <label for="{{ project.project_id }}">{{ project.title }}</label>
+          <p>{{ project.description }}</p>
+          <p>Stated: {{ project.start_date }}</p>
+        {% endfor %}
+        <input type="submit" value="Submit">
 </main>
 
 {% endblock %}

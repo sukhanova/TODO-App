@@ -21,11 +21,9 @@
       <form action = "/selectProject">
         {% for project in projects %}
           <input type="radio" id="{{ project.project_id }}" name="project" value="{{ project.project_id }}">
-          <label for="{{ project.project_id }}">{{ project.project_name }}</label>
+          <label for="{{ project.project_id }}">{{ project.title }}</label>
           <p>{{ project.description }}</p>
-          {% for user in project.users %}
-            <p>{{ user.fname}}</p>
-          {% endfor %}
+          <p>Stated: {{ project.start_date }}</p>
         {% endfor %}
         <input type="submit" value="Submit">
       </form>

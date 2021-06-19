@@ -1,7 +1,7 @@
 """Functions for Lab Dashboard Tracking Task App."""
 
-from flask import (Flask, render_template, request, flash, session,redirect)
-from model import connect_to_db
+from flask import Flask, render_template, request, flash, session,redirect
+from model import User, Project, Task, ProjectTask, UserProject, connect_to_db, db
 import os
 from jinja2 import StrictUndefined
 
