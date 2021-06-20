@@ -68,14 +68,15 @@ class Task(db.Model):
     pub_date = db.Column(db.DateTime)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
 
-    def __init__(self, description, done):
+    def __init__(self, description, done, pub_date, project_id):
         self.description = description
         self.done = False
-        # self.pub_date = date.today()
+        self.pub_date = pub_date
+        self.project_id = project_id
         
 
     def __repr__(self):
-        return f"<{self.id} Task: {self.title}"
+        return f"{self.task_id} Task: {self.description}"
     
     
 class ProjectTask(db.Model):

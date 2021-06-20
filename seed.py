@@ -45,18 +45,18 @@ def create_projects():
     
     print("projects")
     
-    project1 = Project(title="Role of secretory proteins in tuberculosis pathogenesis.",
-                       description="Mtb secrets more than 500 small proteins and peptides which is know as secretome.",
+    project1 = Project(title="Role of secretory proteins in tuberculosis pathogenesis",
+                       description="Mtb secrets more than 500 small proteins and peptides which is know as secretome",
                        start_date="2021-03-12",
                        creator="nkmishra")
     
-    project2 = Project(title="Deciphiring the role of homoserine dehydrogenase in methionine biosynthesis.",
-                       description="Methionine is an essential amino acid. Methinine biosynthesis pathway is absent in all mammales therefore this pathway can be targeted for next generation antibiotics.",
+    project2 = Project(title="Deciphiring the role of homoserine dehydrogenase in methionine biosynthesis",
+                       description="Methionine is an essential amino acid. Methinine biosynthesis pathway is absent in all mammales therefore this pathway can be targeted for next generation antibiotics",
                        start_date="2021-05-24",
                        creator="nkmishra")
     
-    project3 = Project(title="Epigenetic makeup of host cells during Mtb infection.",
-                       description="Mtb changes epigenetic landscape of infected host cells.",
+    project3 = Project(title="Epigenetic makeup of host cells during Mtb infection",
+                       description="Mtb changes epigenetic landscape of infected host cells",
                        start_date="2021-06-16",
                        creator="kberg")
     
@@ -71,34 +71,67 @@ def create_tasks():
     print("tasks")
     
     task1 = Task(description="Grow Mtb in culture at saturation OD.",
-                 done=False)
+                 pub_date="04-01-2021",
+                 done=False,
+                 project_id=1)
     
-    task2 = Task(description="Collect the media from Mtb culture filtrate and lyophilize.",
-                 done=True)
+    task2 = Task(description="Collect the media from Mtb culture filtrate and lyophilize",
+                 pub_date="04-17-2021",
+                 done=False,
+                 project_id=1)
     
-    task3 = Task(description="Do mass spectrometry and identify the proteins and peptide sequence.",
-                 done=False)
+    task3 = Task(description="Do mass spectrometry and identify the proteins and peptide sequence",
+                 pub_date="04-23-2021",
+                 done=False,
+                 project_id=1)
     
-    task4 = Task(description="Define most abundant protein or peptide followed by its expression/synthesis.",
-                 done=False)
+    task4 = Task(description="Define most abundant protein or peptide followed by its expression/synthesis",
+                 pub_date="05-01-2021",
+                 done=False,
+                 project_id=1)
     
-    task5 = Task(description="Add the synthesized peptide/protein to macrophagre cell culture and study cell phenotype.",
-                 done=False)
+    task5 = Task(description="Add the synthesized peptide/protein to macrophagre cell culture and study cell phenotype",
+                 pub_date="06-12-2021",
+                 done=False,
+                 project_id=1)
     
-    task6 = Task(description="Collect the macrophages for different period of time after trearment by protein/peptide.",
-                 done=True)
+    task6 = Task(description="Fractionate cells and collect cytosolic proteins, nucleus and membranes",
+                 pub_date="06-18-2021",
+                 done=False,
+                 project_id=2)
     
-    task7 = Task(description="Fractionate cells and collect cytosolic proteins, nucleus and membranes",
-                 done=False)
+    task7 = Task(description="Collect the macrophages for different period of time after trearment by protein/peptide",
+                 pub_date="05-29-2021",
+                 done=False,
+                 project_id=2)
     
-    task8 = Task(description="Prepare DNA and RNA samples from treated cells and study the base modifications by massspectrometery.",
-                 done=False)
+    task8 = Task(description="Fractionate cells and collect cytosolic proteins, nucleus and membranes",
+                 pub_date="06-18-2021",
+                 done=False,
+                 project_id=2)
+    
+    task9 = Task(description="Prepare DNA and RNA samples from treated cells and study the base modifications by massspectrometery",
+                 pub_date="06-19-2021",
+                 done=False,
+                 project_id=2)
 
-    task9 = Task(description="Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein.",
-                 done=False)
+    task10 = Task(description="Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein",
+                 pub_date="05-29-2021",
+                 done=False,
+                 project_id=2)
+    
+    task11 = Task(description="Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein",
+                 pub_date="06-16-2021",
+                 done=False,
+                 project_id=3)
+    
+    task12 = Task(description="Grow Mtb in culture at saturation OD.",
+                 pub_date="06-18-2021",
+                 done=False,
+                 project_id=3)
 
 
-    db.session.add_all([task1, task2, task3, task4, task5, task6, task7, task8, task9])
+    db.session.add_all([task1, task2, task3, task4, task5, task6, task7, task8, task9, task10, task11, task12])
     db.session.commit()
     
     

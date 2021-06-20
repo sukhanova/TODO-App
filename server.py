@@ -39,14 +39,14 @@ def greet_person():
 
     projects = Project.query.all()
 
-    return render_template("selectProject.html",
+    return render_template("projects.html",
                            personFname=userFname,
                            personLname=userLname,
                            projects=projects
                            )
 
 
-@app.route('/selectProject')
+@app.route('/projects')
 def select_project_form():
     """User choosing project they working on"""
     project_id = request.args.get("project")
@@ -56,28 +56,31 @@ def select_project_form():
     return render_template("project_details.html", project=project)
     
    
-@app.route('/project_details/<int:project_id>')
+@app.route('/projects/<project_id>')
 def add_task(project_id):
     
     project = Project.query.get(project_id)
-    task = Task.query.get_all()
+    # task = Task.query.get_all()
+    task = ProjectTask.query.all()
     
     task_name = request.args.get('task')
     due_date = request.args.get('date')
+    print(project.tasks)
+    print("*"*10)
+    # new_task = Task(description=task_name,
+    #                 pub_date=date,
+    #                 task_id=new_task_id)
+    # db.session.add(new_task)
+    # db.session.commit()
     
-    new_task = Task(description=description,
-                    pub_date=pub_date,
-                    task_id=new_task_id)
-    db.session.add(new_task)
-    db.session.commit()
+    
+    # new_task_id = new_task.task_id
+    # new_project_task = ProjectTask()
+    # db.session.add(new_project_task)
+    # db.session.commit()
     
     
-    new_task_id = new_task.task_id
-    new_project_task = ProjectTask()
-    db.session.add(new_project_task)
-    db.session.commit()
-    
-    return render_template("project_tasks.html", 
+    return render_template("project_details.html", 
                            description=task_name,
                            pub_date=due_date, 
                            project=project)
