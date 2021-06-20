@@ -12,7 +12,7 @@
   <h1>Updated list of project tasks, including yours:</h1>
   <ul>
     {% for tasks in project.tasks %}
-    <li>{{ tasks.description }}</li>
+    <li>{{tasks.task_id}} {{ tasks.description }}</li>
     {% endfor %}
   </ul>
   

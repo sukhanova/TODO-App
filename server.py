@@ -60,13 +60,13 @@ def select_project_form():
 def add_task(project_id):
     
     project = Project.query.get(project_id)
-    # task = Task.query.get_all()
     task = ProjectTask.query.all()
     
     task_name = request.args.get('task')
     due_date = request.args.get('date')
     print(project.tasks)
     print("*"*10)
+    
     # new_task = Task(description=task_name,
     #                 pub_date=date,
     #                 task_id=new_task_id)
