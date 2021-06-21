@@ -1,6 +1,6 @@
 """Functions for Lab Dashboard Tracking Task App."""
 
-from flask import Flask, render_template, request, flash, session,redirect
+from flask import Flask, render_template, request, flash, session,redirect, abort 
 from model import User, Project, Task, ProjectTask, UserProject, connect_to_db, db
 import os
 from jinja2 import StrictUndefined
@@ -11,23 +11,21 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-
-def create_new_task():
-    task = Task(request.form['task'], request.form['status'])
-    db.session.add(task)
-    db.session.commit()
-
-
-def edit_task(task, task_id):
-    description = request.form['description']
-    status = request.form['status']
-    db.session.commit()
-
-
 @app.route('/')
 def index():
     """View the homepage"""
-    return "<html><body>Placeholder for the homepage</body></html>"
+    if 'username' not in session:
+        return render_template ("login.html")
+    return "You logged in"
+
+
+@app.route('/login', methods=['POST'])
+def do_user_login():
+    if request.form['password'] == 'nkmishra' and request.form['username'] == 'nkmishratest':
+        return render_template("homepage.html")
+    else:
+        flash('wrong username and password!')
+        return render_template("login.html")
 
 
 @app.route('/welcome')
@@ -68,7 +66,7 @@ def select_project_form():
     return render_template("project_details.html", project=project)
 
    
-@app.route('/projects/<project_id>')
+@app.route('/project_details/<project_id>')
 def display_tasks(project_id):
     
     project = Project.query.get(project_id)
@@ -80,8 +78,8 @@ def display_tasks(project_id):
     print("*"*10)
     
     
-    # new_task_id = new_task.task_id
-    # new_task = Task(description=task_name,
+    # new_task = Task(description=task,
+    #                 status=status,
     #                 task_id=new_task_id)
     # db.session.add(new_task)
     # db.session.commit()
@@ -92,7 +90,7 @@ def display_tasks(project_id):
     # db.session.add(new_project_task)
     # db.session.commit()
 
-    return render_template("project_details.html", 
+    return render_template("project_tasks.html", 
                            description=task, 
                            status=status, 
                            project=project)

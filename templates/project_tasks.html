@@ -2,7 +2,7 @@
 
 {% block title %} 
 
-  Project tasks: 
+  Updated list of project tasks: 
 
 {% endblock %}
 
@@ -21,7 +21,7 @@
       </thead>
 
       <tbody>
-      {% for tasks in project.tasks %}
+      {% for tasks in project.tasks %}   
           <tr>
               <td>{{tasks.task_id}}</td>
               <td>{{tasks.description}}</td>
