@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+<h1>Project: "{{ project.title }}."</h1>
+<p>Project description: "{{ project.description }}."</p>
+<p>Started: {{ project.start_date }}</p>
 
 <!-- Todo Table -->
 <div>          
@@ -35,7 +38,6 @@
                     <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
                 {%endif%}
 
-
                 <td><button type="button" data-source="{{tasks.task_id}}">Edit</button></td>
 
                 <td><button class="remove" data-source="{{tasks.task_id}}" type="button">Remove</button></td>
@@ -47,11 +49,24 @@
 
 <main>
 
-    <h1>Add task to the project:</h1>
+    <h1>Add new task to the project:</h1>
     <form action="/project_details/{{ project.project_id }}">
-      <p><label> Task: <input type="text" name="task"></label></p>
-      <p><label> Due date: <input type="date" name="pub_date"></label></p>
-      <p><input type="submit"></p>
+      <p>
+        <!-- <label> New task: <input type="text" name="task"></label> -->
+        <label>New task: 
+          <textarea name="task" rows="3" cols="35"></textarea>
+        </label>
+      </p>
+      <p>
+        <label for="status"> Select status:</label>
+        <select name="status">
+          <option value="todo">Todo</option>
+          <option value="inProgress">In Progress</option>
+          <option value="complete">Complete</option></select>
+        </p>
+      <p>
+        <input type="submit">
+      </p>
     </form>
 
 {% endblock %}

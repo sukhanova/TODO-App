@@ -66,14 +66,12 @@ class Task(db.Model):
     description = db.Column(db.String)
     done = db.Column(db.Boolean)
     status = db.Column(db.String)
-    pub_date = db.Column(db.DateTime)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
 
-    def __init__(self, description, done, status, pub_date, project_id):
+    def __init__(self, description, done, status, project_id):
         self.description = description
         self.done = False
         self.status = status
-        self.pub_date = pub_date
         self.project_id = project_id
         
 

@@ -7,15 +7,43 @@
 {% endblock %}
 
 {% block body %}
+<h1>Placeholder</h1>
+<div>          
+  <table class="table">
+      <thead>
+      <tr>
+          <th class="task-id">#</th>
+          <th class="task">Task Name</th>
+          <th class="status">Status</th>
+          <th class="update">Edit</th>
+          <th class="update">Remove</th>
+      </tr>
+      </thead>
 
-<section>
-  <h1>Updated list of project tasks, including yours:</h1>
-  <ul>
-    {% for tasks in project.tasks %}
-    <li>{{tasks.task_id}} {{ tasks.description }}</li>
-    {% endfor %}
-  </ul>
-  
-</section>
+      <tbody>
+      {% for tasks in project.tasks %}
+          <tr>
+              <td>{{tasks.task_id}}</td>
+              <td>{{tasks.description}}</td>
+
+              {% if tasks.status == "In Progress" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+                {% if tasks.status == "Todo" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+                {% if tasks.status == "Complete" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+
+
+                <td><button type="button" data-source="{{tasks.task_id}}">Edit</button></td>
+
+                <td><button class="remove" data-source="{{tasks.task_id}}" type="button">Remove</button></td>
+
+      {% endfor %}
+      
+      </tbody>
+  </table>
 
 {% endblock %}
