@@ -14,18 +14,7 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """View the homepage"""
-    if 'username' not in session:
-        return render_template ("login.html")
-    return "You logged in"
-
-
-@app.route('/login', methods=['POST'])
-def do_user_login():
-    if request.form['password'] == 'nkmishra' and request.form['username'] == 'nkmishratest':
-        return render_template("homepage.html")
-    else:
-        flash('wrong username and password!')
-        return render_template("login.html")
+    return "Placeholder"
 
 
 @app.route('/welcome')
@@ -55,7 +44,6 @@ def greet_person():
                            projects=projects
                            )
 
-
 @app.route('/projects')
 def select_project_form():
     """User choosing project they working on"""
@@ -66,7 +54,7 @@ def select_project_form():
     return render_template("project_details.html", project=project)
 
    
-@app.route('/project_details/<project_id>')
+@app.route('/projects/<project_id>')
 def display_tasks(project_id):
     
     project = Project.query.get(project_id)
@@ -90,7 +78,7 @@ def display_tasks(project_id):
     # db.session.add(new_project_task)
     # db.session.commit()
 
-    return render_template("project_tasks.html", 
+    return render_template("project_details.html", 
                            description=task, 
                            status=status, 
                            project=project)

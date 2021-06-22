@@ -5,11 +5,14 @@
 
 You're logged in already!
 
-{% else %}
+{% else %} -->
 <form action="/login" method="POST">
+    <input type="text" name="fname" placeholder="First name">
+    <input type="text" name="lname" placeholder="Last Name">
     <input type="username" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Log in">
 </form>
 {% endif %}
+
 {% endblock %}
