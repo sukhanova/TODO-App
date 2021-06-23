@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Events{% endblock %}
+{% block title %}Tasks{% endblock %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
 
 	<h1 style="margin: 0 0 5% 10%;">Tasks</h1>
 
-	{% for task in taskss %}
+	{% for task in tasks %}
 
 		<div style="margin: 0 10% 5% 10%;">
 			<h2>{{ task.description }}</h2>
@@ -22,7 +22,5 @@
 		</div>
 
 	{% endfor %}
-
-
 
 {% endblock %}

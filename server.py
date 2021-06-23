@@ -112,16 +112,34 @@ def get_user(user_id):
 	return render_template('profile.html', user=user)
 
 
-@app.route('/projects')
-def select_project_form():
-    """User choosing project they working on"""
-    project_id = request.args.get("project")
+@app.route('/tasks')
+def all_tasks():
+    """Page with a list of all tasks"""
     
-    project = Project.query.get(project_id)
+    tasks = Task.query.order_by(Task.status.asc()).all()
     
-    return render_template("project_details.html", project=project)
+    return render_template('tasks.html', tasks=tasks)
 
 
+@app.route('/new_task')
+def new_task_form():
+
+	return render_template('new_task.html')
+
+
+@app.route('/create_task', methods=['POST'])
+def create_task():
+
+	app.logger.info('Creating new task...')
+
+	task_data = dict(request.form)
+
+	task = Task(**task_data)
+	task.save()
+	app.logger.info(f'New task {task.task_id} created. \nAdding to tasks page...')
+
+	# redirect to tasks details page
+	return redirect('/tasks')
 
 
 # @app.route('/greet')
