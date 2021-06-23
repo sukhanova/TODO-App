@@ -4,13 +4,12 @@
 
 {% block content %}
 
-<!--
-	
-	To Do:
-		- Username
-		- Projects to select
-		-	Task assosiated with projects
-		
--->
+	<div class="container">
+		<!-- display username & first / last name -->
+		<h2 class="text-center" style="margin: 10%;">Hello, {{ user.fname }}<!-- {{ user.lname }}-->!</h2>
+
+		<h5 class="text-justify">Username: {{ user.username }}</h5>
+		<br>
+	</div>
 
 {% endblock %}

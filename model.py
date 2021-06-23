@@ -48,7 +48,7 @@ class User(ModelMix, db.Model):
 
 
   
-class Project(db.Model):
+class Project(ModelMix, db.Model):
     """A project table in task_tracking database."""
     
     __tablename__ = 'projects'
@@ -74,7 +74,7 @@ class Project(db.Model):
     
 
     
-class Task(db.Model):
+class Task(ModelMix, db.Model):
     """A task table in task_tracking database."""
     
     __tablename__ = "tasks"

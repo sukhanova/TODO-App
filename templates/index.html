@@ -1,5 +1,49 @@
 {% extends 'base.html' %}
 
+	<style>
+		body { margin: 0; padding: 0; }
+		#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+	</style>
+	
+
 {% block content %}
 
+	<div class="container-fluid">
+		<div class="col">
+			<form id="select-details" method="post" action="/details">
+				
+				<div class="form-group row">
+					<label>Select project for details</label>
+					<select class="form-control" id="project-title-field" name="project_title">
+						<!-- for loop to display all projects names -->
+						{% for project in projects %}
+							<option value="{{ project.title }}">{{ project.title }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+
+				<div class="form-group row">
+					<button type="submit" class="btn btn-outline-secondary">Submit</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+    <!-- 	display details here -->
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center">
+            <h2 id="show-title"></h2>
+        </div>
+
+
+        <div class="d-flex justify-content-center" id="details">
+            <p id="show-description"></p>
+        </div>
+    </div>
+
+	<!-- <script type="text/javascript" src="static/main.js"></script> -->
 {% endblock %}

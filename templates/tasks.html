@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+
+<!-- list of tasks -->
+
+	<div class="row" style="margin: 5% 5% 5% 70%;">
+		<div class="col-sm">
+			<a class="btn btn-secondary btn-lg" href="{{ url_for('new_task_form') }}">Create New Task</a>
+		</div>
+	</div>
+
+	<h1 style="margin: 0 0 5% 10%;">Tasks</h1>
+
+	{% for task in taskss %}
+
+		<div style="margin: 0 10% 5% 10%;">
+			<h2>{{ task.description }}</h2>
+			<h3>{{ task.status }} </h3>
+		</div>
+
+	{% endfor %}
+
+
+
+{% endblock %}
