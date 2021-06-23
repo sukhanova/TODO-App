@@ -39,7 +39,7 @@ def login():
 
 	if user.login(request.form.get('password')):
 		app.logger.info('...Login successful.')
-		session['user_id'] = user.id
+		session['user_id'] = user.user_id
 	else:
 		app.logger.info('-  Login failure  -')
 		flash('Invalid username or password.')
@@ -69,37 +69,12 @@ def register_auth():
 		user = User(**user_data)
 		user.create_password(user_data.get('password'))
 		user.save()
-		app.logger.info(f'New user {user.id} created. Logging in...')
-		session['user_id'] = user.id
+		app.logger.info(f'New user {user.user_id} created. Logging in...')
+		session['user_id'] = user.user_id
 
-		return redirect(f'/users/{user.id}')
-
-
-# @app.route('/logout')
-# def logout():
-# 	del session['user_id']
-
-# 	return redirect('/')
+		return redirect(f'/users/{user_id}')
 
 
-# @app.route('/api/register', methods=['POST'])
-# def register_auth():
-# 	"""Handles user registration data"""
-
-# 	app.logger.info('Registering new user...')
-
-# 	user_data = dict(request.form)
-
-# 	if user_data.get('password') == user_data.get('passwordConfirm'):
-# 		del user_data['passwordConfirm']
-
-# 		user = User(**user_data)
-# 		user.create_password(user_data.get('password'))
-# 		user.save()
-# 		app.logger.info(f'New user {user.id} created. Logging in...')
-# 		session['user_id'] = user.id
-
-# 		return redirect(f'/users/{user.id}')
 
 # @app.route('/welcome')
 # def say_hello():
