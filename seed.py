@@ -71,62 +71,50 @@ def create_tasks():
     print("tasks")
     
     task1 = Task(description="Grow Mtb in culture at saturation OD.",
-                 done=False,
                  status="In Progress",
                  project_id=1)
     
     task2 = Task(description="Collect the media from Mtb culture filtrate and lyophilize",
-                 done=False,
                  status="Todo",
                  project_id=1)
     
     task3 = Task(description="Do mass spectrometry and identify the proteins and peptide sequence",
-                 done=False,
                  status="Complete",
                  project_id=1)
     
     task4 = Task(description="Define most abundant protein or peptide followed by its expression/synthesis",
-                 done=False,
                  status="Todo",
                  project_id=1)
     
     task5 = Task(description="Add the synthesized peptide/protein to macrophagre cell culture and study cell phenotype",
-                 done=False,
                  status="In Progress",
                  project_id=1)
     
     task6 = Task(description="Fractionate cells and collect cytosolic proteins, nucleus and membranes",
-                 done=False,
                  status="Todo",
                  project_id=2)
     
     task7 = Task(description="Collect the macrophages for different period of time after trearment by protein/peptide",
-                 done=False,
                  status="In Progress",
                  project_id=2)
     
     task8 = Task(description="Fractionate cells and collect cytosolic proteins, nucleus and membranes",
-                 done=False,
                  status="Complete",
                  project_id=2)
     
     task9 = Task(description="Prepare DNA and RNA samples from treated cells and study the base modifications by massspectrometery",
-                 done=False,
                  status="Todo",
                  project_id=2)
 
     task10 = Task(description="Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein",
-                 done=False,
                  status="In Progress",
                  project_id=2)
     
     task11 = Task(description="Perform RNAseq and find out the changes in trnscription after macrophages treatment by peptide/protein",
-                 done=False,
                  status="Complete",
                  project_id=3)
     
     task12 = Task(description="Grow Mtb in culture at saturation OD.",
-                 done=False,
                  status="Todo",
                  project_id=3)
 

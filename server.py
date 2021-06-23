@@ -1,6 +1,6 @@
 """Functions for Lab Dashboard Tracking Task App."""
 
-from flask import Flask, render_template, request, flash, session,redirect, abort 
+from flask import Flask, render_template, request, flash, session,redirect, abort, jsonify 
 from model import User, Project, Task, ProjectTask, UserProject, connect_to_db, db
 import os
 from jinja2 import StrictUndefined
@@ -14,75 +14,158 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """View the homepage"""
-    return "Placeholder"
+    return render_template("index.html")
 
 
-@app.route('/welcome')
-def say_hello():
-    """Collect users first and last name."""
+@app.route('/register')
+def register_user():
+	"""User registration page"""
 
-    return render_template("homepage.html")
+	return render_template("register.html")
+
+@app.route('/login')
+def login_form():
+	"""User login page"""
+
+	return render_template('login.html')
 
 
-@app.route('/greet')
-def greet_person():
-    """Greet user by first and last name. Query database to pdisplay existing projects
-    for choice buttons"""
+# ------- Auth Routes -------
 
-    userFname = request.args.get("fname")
-    userLname = request.args.get("lname")
 
-    new_user = User(fname=userFname, lname=userLname)
-    db.session.add(new_user)
-    db.session.commit()
+@app.route('/api/auth', methods=['POST'])
+def login():
+	user = User.query.filter_by(username=request.form.get('username')).first()
 
-    projects = Project.query.all()
+	if user.login(request.form.get('password')):
+		app.logger.info('...Login successful.')
+		session['user_id'] = user.id
+	else:
+		app.logger.info('-  Login failure  -')
+		flash('Invalid username or password.')
+		return render_template('login.html')
 
-    return render_template("projects.html",
-                           personFname=userFname,
-                           personLname=userLname,
-                           projects=projects
-                           )
+	return render_template('profile.html', user=user)
 
-@app.route('/projects')
-def select_project_form():
-    """User choosing project they working on"""
-    project_id = request.args.get("project")
+
+@app.route('/logout')
+def logout():
+	del session['user_id']
+
+	return redirect('/')
+
+
+@app.route('/api/register', methods=['POST'])
+def register_auth():
+	"""Handles user registration data"""
+
+	app.logger.info('Registering new user...')
+
+	user_data = dict(request.form)
+
+	if user_data.get('password') == user_data.get('passwordConfirm'):
+		del user_data['passwordConfirm']
+
+		user = User(**user_data)
+		user.create_password(user_data.get('password'))
+		user.save()
+		app.logger.info(f'New user {user.id} created. Logging in...')
+		session['user_id'] = user.id
+
+		return redirect(f'/users/{user.id}')
+
+
+# @app.route('/logout')
+# def logout():
+# 	del session['user_id']
+
+# 	return redirect('/')
+
+
+# @app.route('/api/register', methods=['POST'])
+# def register_auth():
+# 	"""Handles user registration data"""
+
+# 	app.logger.info('Registering new user...')
+
+# 	user_data = dict(request.form)
+
+# 	if user_data.get('password') == user_data.get('passwordConfirm'):
+# 		del user_data['passwordConfirm']
+
+# 		user = User(**user_data)
+# 		user.create_password(user_data.get('password'))
+# 		user.save()
+# 		app.logger.info(f'New user {user.id} created. Logging in...')
+# 		session['user_id'] = user.id
+
+# 		return redirect(f'/users/{user.id}')
+
+# @app.route('/welcome')
+# def say_hello():
+#     """Collect users first and last name."""
+
+#     return render_template("homepage.html")
+
+
+# @app.route('/greet')
+# def greet_person():
+#     """Greet user by first and last name. Query database to pdisplay existing projects
+#     for choice buttons"""
+
+#     userFname = request.args.get("fname")
+#     userLname = request.args.get("lname")
+
+#     new_user = User(fname=userFname, lname=userLname)
+#     db.session.add(new_user)
+#     db.session.commit()
+
+#     projects = Project.query.all()
+
+#     return render_template("projects.html",
+#                            personFname=userFname,
+#                            personLname=userLname,
+#                            projects=projects
+#                            )
+
+# @app.route('/projects')
+# def select_project_form():
+#     """User choosing project they working on"""
+#     project_id = request.args.get("project")
     
-    project = Project.query.get(project_id)
+#     project = Project.query.get(project_id)
     
-    return render_template("project_details.html", project=project)
+#     return render_template("project_details.html", project=project)
 
    
-@app.route('/projects/<project_id>')
-def display_tasks(project_id):
+# @app.route('/projects/<project_id>')
+# def display_tasks(project_id):
     
-    project = Project.query.get(project_id)
-    task = ProjectTask.query.all()
+#     project = Project.query.get(project_id)
+#     task = ProjectTask.query.all()
     
-    description = request.args.get("task")
-    status = request.args.get("status")
-    print(project.tasks)
-    print("*"*10)
-    
-    
-    # new_task = Task(description=task,
-    #                 status=status,
-    #                 task_id=new_task_id)
-    # db.session.add(new_task)
-    # db.session.commit()
+#     description = request.args.get("task")
+#     status = request.args.get("status")
+#     print(project.tasks)
+#     print("*"*10)
     
     
-    # new_task_id = new_task.task_id
-    # new_project_task = ProjectTask()
-    # db.session.add(new_project_task)
-    # db.session.commit()
+#     # new_task = Task(description=task,
+#     #                 status=status,
+#     #                 task_id=new_task_id)
+#     # db.session.add(new_task)
+#     # db.session.commit()
+    
+    
+#     # new_task_id = new_task.task_id
+#     # new_project_task = ProjectTask()
+#     # db.session.add(new_project_task)
+#     # db.session.commit()
 
-    return render_template("project_details.html", 
-                           description=task, 
-                           status=status, 
-                           project=project)
-
+#     return render_template("project_details.html", 
+#                            description=task, 
+#                            status=status, 
+#                            project=project)
 
     
 if __name__ == '__main__':

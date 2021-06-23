@@ -2,13 +2,24 @@
 
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
 ##############################################################################
 # Model definitions
+class ModelMix:
 
-class User(db.Model):
+	def save(self):
+		db.session.add(self)
+		db.session.commit()
+
+	def delete(self):
+		db.session.delete(self)
+		db.session.commit()
+
+
+class User(ModelMix, db.Model):
     """A user table in task_tracking database."""
 
     __tablename__ = 'users'
@@ -28,7 +39,15 @@ class User(db.Model):
         return f'<User user_id={self.user_id} fname={self.fname} lname={self.lname} username={self.username} email={self.email}>'
 
     
-    
+    def create_password(self, password):
+        self.password = generate_password_hash(password)
+        
+	
+    def login(self, password):
+        return check_password_hash(self.password, password)
+
+
+  
 class Project(db.Model):
     """A project table in task_tracking database."""
     
@@ -64,13 +83,11 @@ class Task(db.Model):
                    autoincrement=True, 
                    primary_key=True)
     description = db.Column(db.String)
-    done = db.Column(db.Boolean)
     status = db.Column(db.String)
     project_id = db.Column(db.Integer, db.ForeignKey("projects.project_id"))
 
-    def __init__(self, description, done, status, project_id):
+    def __init__(self, description, status, project_id):
         self.description = description
-        self.done = False
         self.status = status
         self.project_id = project_id
         
