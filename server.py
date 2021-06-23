@@ -34,8 +34,8 @@ def show_details():
 	return jsonify({'name': project.title, 
 				    'description': project.description,
                     'start_date': project.start_date})
- 
- 
+
+    
 @app.route('/about')
 def show_about():
 	"""About page"""
@@ -116,7 +116,7 @@ def get_user(user_id):
 def all_tasks():
     """Page with a list of all tasks"""
     
-    tasks = Task.query.order_by(Task.status.asc()).all()
+    tasks = Task.query.order_by(Task.status.desc()).all()
     
     return render_template('tasks.html', tasks=tasks)
 
@@ -130,17 +130,14 @@ def new_task_form():
 @app.route('/create_task', methods=['POST'])
 def create_task():
 
-	app.logger.info('Creating new task...')
-
-	task_data = dict(request.form)
-
-	task = Task(**task_data)
-	task.save()
-	app.logger.info(f'New task {task.task_id} created. \nAdding to tasks page...')
-
-	# redirect to tasks details page
-	return redirect('/tasks')
-
+    app.logger.info('Creating new task...')
+    
+    task_data = dict(request.form)
+    task = Task(**task_data)
+    task.save()
+    app.logger.info(f"New task {task.task_id} created. \nAdding to tasks page...")
+    # redirect to tasks details page
+    return redirect('/tasks')
 
 # @app.route('/greet')
 # def greet_person():
@@ -172,34 +169,9 @@ def create_task():
 #     return render_template("project_details.html", project=project)
 
    
-# @app.route('/projects/<project_id>')
-# def display_tasks(project_id):
-    
-#     project = Project.query.get(project_id)
-#     task = ProjectTask.query.all()
-    
-#     description = request.args.get("task")
-#     status = request.args.get("status")
+#z
 #     print(project.tasks)
 #     print("*"*10)
-    
-    
-#     # new_task = Task(description=task,
-#     #                 status=status,
-#     #                 task_id=new_task_id)
-#     # db.session.add(new_task)
-#     # db.session.commit()
-    
-    
-#     # new_task_id = new_task.task_id
-#     # new_project_task = ProjectTask()
-#     # db.session.add(new_project_task)
-#     # db.session.commit()
-
-#     return render_template("project_details.html", 
-#                            description=task, 
-#                            status=status, 
-#                            project=project)
 
     
 if __name__ == '__main__':

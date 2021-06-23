@@ -11,24 +11,25 @@
 			<div class="form-group row">
 				<h2 class="text-center">Create New Task</h2>
 			</div>
-
+			
 			<div class="form-group row">
-				<label>Project</label>
-				<input type="text" class="form-control" name="project_id" id="projectid" required>
+				<label>Project ID</label>
+				<input type="text" class="form-control" name="project_id" id="project_id" required>
 			</div>
 
 			<div class="form-group row">
 				<label>Task</label>
-				<input type="text" class="form-control" name="description" id="taskdescription" required>
+				<!-- <input type="text" class="form-control" name="description" id="taskdescription" required> -->
+				<textarea type="text" class="form-control" name="description" id="taskdescription" rows="2" cols="28" required></textarea>
 			</div>
 
 			<div class="form-group row">
 				<label>Status</label>
 				<!-- <input type="text" class="form-control" name="status" id="taskStatus" required> -->
 				<select type="text" class="form-control" name="status" id="taskStatus" required>
-					<option value="todo">Todo</option>
-					<option value="inProgress">In Progress</option>
-					<option value="complete">Complete</option></select>
+					<option value="Todo">Todo</option>
+					<option value="In Progress">In Progress</option>
+					<option value="Complete">Complete</option></select>
 			</div>
 
 			<div class="form-group row">
