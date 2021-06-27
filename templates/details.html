@@ -1,7 +1,59 @@
 {% extends 'base.html' %}
 
+{% block title %} 
+
+{% endblock %}
+
 {% block content %}
+<h1>Project: "{{ project.title }}."</h1>
+<p>Project description: "{{ project.description }}."</p>
+<p>Started: {{ project.start_date }}</p>
 
-{{ project.title }}
+<h2>List of tasks for the project</h2>
 
+<!-- list of tasks -->
+
+<div class="row" style="margin: 5% 5% 5% 70%;">
+    <div class="col-sm">
+        <a class="btn btn-secondary btn-lg" href="{{ url_for('new_task_form') }}">Create New Task</a>
+    </div>
+</div>
+
+<div>          
+  <table class="table">
+      <thead>
+      <tr>
+          <th class="task-id">#</th>
+          <th class="task">Task Name</th>
+          <th class="status">Status</th>
+          <th class="update">Edit</th>
+          <th class="update">Remove</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for tasks in project.tasks %} 
+          <tr>
+              <td>{{tasks.task_id}}</td>
+              <td>{{tasks.description}}</td>
+
+              {% if tasks.status == "In Progress" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+                {% if tasks.status == "Todo" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+                {% if tasks.status == "Complete" %}
+                    <td><button type="button" data-source="{{tasks.task_id}}">{{tasks.status}}</button></td>
+                {%endif%}
+
+
+                <td><button type="button" data-source="{{tasks.task_id}}">Edit</button></td>
+
+                <td><button class="remove" data-source="{{tasks.task_id}}" type="button">Remove</button></td>
+
+      {% endfor %}
+      
+      </tbody>
+  </table>
 {% endblock %}

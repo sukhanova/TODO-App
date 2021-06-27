@@ -23,19 +23,26 @@ def index():
                            projects=projects)
     
    
+# @app.route('/details', methods=['POST'])
+# def show_details():
+# 	"""Renders description and details in place on index.html"""
+
+# 	project_title = request.form.get('project_title')
+
+# 	project = Project.query.filter(Project.title==project_title).first()
+# 	return jsonify({'name': project.title, 
+# 				    'description': project.description,
+#                     'start_date': project.start_date})
+
+
 @app.route('/details', methods=['POST'])
 def show_details():
-	"""Renders description and details in place on index.html"""
+    project_id = request.form.get("project_id")
+    project = Project.query.get(project_id)
+	
+    return render_template("details.html", project=project, tasks=project.tasks)
 
-	project_title = request.form.get('project_title')
-
-	project = Project.query.filter(Project.title==project_title).first()
-
-	return jsonify({'name': project.title, 
-				    'description': project.description,
-                    'start_date': project.start_date})
-
-    
+  
 @app.route('/about')
 def show_about():
 	"""About page"""

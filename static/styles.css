@@ -1,0 +1,43 @@
+h1 h2 h3 h4 h5 h6 {
+	font-family: 'Optime', sans-serif;
+	font-weight: bold;
+}
+
+body {
+	font-family: 'Gill Sans', sans-serif;
+	color: #291C1F;
+}
+
+p.white-font {
+	color: #FFFFFF;
+}
+
+#loginForm {
+	margin: 5%;
+}
+
+#registerForm {
+	margin: 5% 0 0 45%;
+}
+
+#select-details {
+	margin: 10% 25% 10% 25%;
+}
+
+#details {
+	margin-bottom: 10%;
+}
+
+.navbar-custom {
+	color: #EAB595;
+	background-color: #A36C67;
+}
+
+.jumbotron {
+	margin: 0;
+	background-color: #FFFFFF;
+}
+
+#about {
+	margin: 10%;
+}

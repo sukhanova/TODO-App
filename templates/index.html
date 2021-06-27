@@ -2,7 +2,6 @@
 
 	<style>
 		body { margin: 0; padding: 0; }
-		#map { position: absolute; top: 0; bottom: 0; width: 100%; }
 	</style>
 	
 
@@ -13,11 +12,11 @@
 		<form id="select-details" method="post" action="/details">
 			
 			<div class="form-group row">
-				<label>Select project for details</label>
-				<select class="form-control" id="project-title-field" name="project_title">
+				<label>Select project to see details</label>
+				<select class="form-control" id="project-title-field" name="project_id">
 					<!-- for loop to display all projects names -->
 					{% for project in projects %}
-						<option value="{{ project.title }}">{{ project.title }}
+						<option value="{{ project.project_id }}">{{ project.title }}
 						</option>
 					{% endfor %}
 				</select>
@@ -34,21 +33,22 @@
 
     <!-- 	display details here -->
 
-    <div class="container-fluid">
-        <div class="d-flex justify-content-center">
+    <div>
+        <div>
             <h2 id="show-title"></h2>
         </div>
 
 
-        <div class="d-flex justify-content-center" id="details">
+        <div id="details">
             <p id="show-description"></p>
         </div>
 
 
-		<div class="d-flex justify-content-center" id="details">
+		<div id="details">
             <p id="show-start-date"></p>
         </div>
     </div>
 
+	<img src="https://d31kydh6n6r5j5.cloudfront.net/uploads/sites/24/2019/01/1613407_orig.jpg?resize=700,394&crop=0,8,100,84" class="img-fluid" alt="Responsive image">
 	<script type="text/javascript" src="static/main.js"></script>
 {% endblock %}
