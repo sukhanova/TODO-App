@@ -15,12 +15,14 @@
 	<h1 style="margin: 0 0 5% 10%;">Tasks</h1>
 
 
-	{% endfor %} -->
+
 <div style="margin: 0 10% 5% 10%;">          
   <table class="table">
       <thead>
       <tr>
-          <th class="task-id">#</th>
+          
+          <th class="project-id">Project #</th>
+          <th class="task-id">Task #</th>
           <th class="task">Task Name</th>
           <th class="status">Status</th>
           <th class="update">Edit</th>
@@ -31,6 +33,7 @@
       <tbody>
       {% for tasks in tasks %} 
           <tr>
+            <td>{{tasks.project_id}}</td>
               <td>{{tasks.task_id}}</td>
               <td>{{tasks.description}}</td>
 

@@ -111,7 +111,7 @@ def get_user(user_id):
 def all_tasks():
     """Page with a list of all tasks"""
     
-    tasks = Task.query.order_by(Task.status.desc()).all()
+    tasks = Task.query.order_by(Task.project_id.asc(), Task.status.desc(), Task.task_id.desc()).all()
     
     return render_template('tasks.html', tasks=tasks)
 
@@ -126,13 +126,13 @@ def new_task_form():
 def create_task():
     
     app.logger.info('Creating new task...')
-    
-    task_data = dict(request.form)
-    task = Task(**task_data)
-    task.save()
-    app.logger.info(f"New task {task.task_id} created. \nAdding to tasks page...")
-    # redirect to tasks details page
-    return redirect('/tasks')
+    if request.method == 'POST':
+        task_data = dict(request.form)
+        task = Task(**task_data)
+        task.save()
+        app.logger.info(f"New task {task.task_id} created. \nAdding to tasks page...")
+        # redirect to tasks details page
+        return redirect('tasks')
 
 
 #     print(project.tasks)
