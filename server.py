@@ -21,18 +21,6 @@ def index():
     projects = Project.query.order_by(Project.title.asc()).all()
     return render_template("index.html",
                            projects=projects)
-    
-   
-# @app.route('/details', methods=['POST'])
-# def show_details():
-# 	"""Renders description and details in place on index.html"""
-
-# 	project_title = request.form.get('project_title')
-
-# 	project = Project.query.filter(Project.title==project_title).first()
-# 	return jsonify({'name': project.title, 
-# 				    'description': project.description,
-#                     'start_date': project.start_date})
 
 
 @app.route('/details', methods=['POST'])
@@ -130,13 +118,13 @@ def all_tasks():
 
 @app.route('/new_task')
 def new_task_form():
-
-	return render_template('new_task.html')
+    
+    return render_template('new_task.html')
 
 
 @app.route('/create_task', methods=['POST'])
 def create_task():
-
+    
     app.logger.info('Creating new task...')
     
     task_data = dict(request.form)
@@ -146,37 +134,7 @@ def create_task():
     # redirect to tasks details page
     return redirect('/tasks')
 
-# @app.route('/greet')
-# def greet_person():
-#     """Greet user by first and last name. Query database to pdisplay existing projects
-#     for choice buttons"""
 
-#     userFname = request.args.get("fname")
-#     userLname = request.args.get("lname")
-
-#     new_user = User(fname=userFname, lname=userLname)
-#     db.session.add(new_user)
-#     db.session.commit()
-
-#     projects = Project.query.all()
-
-#     return render_template("projects.html",
-#                            personFname=userFname,
-#                            personLname=userLname,
-#                            projects=projects
-#                            )
-
-# @app.route('/projects')
-# def select_project_form():
-#     """User choosing project they working on"""
-#     project_id = request.args.get("project")
-    
-#     project = Project.query.get(project_id)
-    
-#     return render_template("project_details.html", project=project)
-
-   
-#z
 #     print(project.tasks)
 #     print("*"*10)
 

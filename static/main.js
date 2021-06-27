@@ -1,24 +1,4 @@
-// "use strict";
-
-
-
-// $("#select-details").on("submit", (evt) => {
-// 	evt.preventDefault();
-
-// 	const formInputs = {
-// 		name: $('#project-title').val()
-// 	};
-// 	$.ajax({
-// 		url:'/details',
-// 		data: JSON.stringify(formInputs),
-// 		contentType: "application/json",
-// 		success: (response)=>{
-// 			$('#show-title').html(`${response.name}`)
-// 		},
-// 		method: "POST",
-// 	});
-// });
-
+"use strict";
 
 
 function showProjectDetails(evt) {
