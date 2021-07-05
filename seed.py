@@ -7,7 +7,7 @@ from server import app
 def create_users():
     """Add users to users table."""
     
-    print("users")
+    print(f"Creating users")
     
     neeraj = User(fname="Neeraj",
                   lname="Mishra", 
@@ -43,7 +43,7 @@ def create_users():
 def create_projects():
     """Add projects to projects table."""
     
-    print("projects")
+    print(f"Creating projects")
     
     project1 = Project(title="Role of secretory proteins in tuberculosis pathogenesis",
                        description="Mtb secrets more than 500 small proteins and peptides which is know as secretome",
@@ -68,7 +68,7 @@ def create_projects():
 def create_tasks():
     """Add tasks to tasks table."""
     
-    print("tasks")
+    print(f"Creating tasks")
     
     task1 = Task(description="Grow Mtb in culture at saturation OD.",
                  status="In Progress",
@@ -127,7 +127,7 @@ def create_tasks():
 def create_project_tasks():
     """Add project tasks to project_tasks table."""
     
-    print("project_tasks")
+    print(f"Creating project_tasks")
     
     projectTask1 = ProjectTask(task_id=1, project_id=1)
     projectTask2 = ProjectTask(task_id=2, project_id=1)
@@ -148,7 +148,7 @@ def create_project_tasks():
  
 def create_users_projects():
     """Add users and project to users_projects table."""
-    print("users_projects")
+    print(f"Creating users_projects")
     
     user_project1 = UserProject(user_id=1, project_id=1)
     user_project2 = UserProject(user_id=1, project_id=2)
@@ -169,7 +169,7 @@ def set_val_user_id():
 
     #Set new value for the next user_id to be max_id + 1
     query = "SELECT setval('users_user_id_seq', :new_id)"
-    db.session.execute(query, {'new_id': max_id + 1})
+    db.session.execute(query, {"new_id": max_id + 1})
     db.session.commit()   
     
     

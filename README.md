@@ -45,7 +45,7 @@
 
 #### Install dependencies:
   ```
-  (env) $ pip3 install -r requirements.tx
+  (env) $ pip3 install -r requirements.txt
   ```
 
 #### Create and seed the database: 
