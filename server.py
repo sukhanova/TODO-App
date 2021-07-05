@@ -29,10 +29,11 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """View the homepage"""
     
-    projects = Project.query.order_by(Project.title.asc()).all()
-    return render_template("index.html",
-                           projects=projects)
-
+    if "user_id" in session:
+        # return redirect(f"/about")
+        projects = Project.query.order_by(Project.title.asc()).all()
+        return render_template("index.html",projects=projects)
+    return render_template("login.html")
 
 @app.route('/details', methods=['POST'])
 def show_details():
@@ -128,8 +129,8 @@ def all_tasks():
 
 @app.route("/new_task")
 def new_task_form():
-    
-    return render_template("new_task.html")
+    projects = Project.query.order_by(Project.project_id.asc()).all()
+    return render_template("new_task.html", projects=projects)
 
 @app.route("/create_task", methods=['POST'])
 def create_task():
