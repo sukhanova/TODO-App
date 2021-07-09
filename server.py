@@ -134,6 +134,7 @@ def new_task_form():
 
 @app.route("/create_task", methods=['POST'])
 def create_task():
+    """Add new task to the project"""
     app.logger.info("Creating new task...")
     if request.method == 'POST':
         task_data = dict(request.form)
@@ -144,6 +145,17 @@ def create_task():
         return redirect("/tasks")
 
 
+@app.route("/delete/<int:task_id>", methods=["POST"])
+def delete_task(task_id):
+    """Delete task from project"""
+    task_to_delete = Task.query.get(task_id)
+    db.session.delete(task_to_delete)
+    db.session.commit()
+    print(task_to_delete)
+    print("*"*10)	
+    return redirect('/tasks')
+    
+ 
 #     print(project.tasks)
 #     print("*"*10)
 

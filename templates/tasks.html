@@ -50,7 +50,12 @@
 
                 <td><button type="button" data-source="{{tasks.task_id}}">Edit</button></td>
 
-                <td><button class="remove" data-source="{{tasks.task_id}}" type="button">Remove</button></td>
+                <td>
+                    <form action="/delete/{{tasks.task_id}}" method="post">
+                        <button data-source="{{tasks.task_id}}" type="submit">Remove</button>
+                    </form>
+                <td>
+                    
 
       {% endfor %}
       
