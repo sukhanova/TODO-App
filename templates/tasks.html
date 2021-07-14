@@ -48,7 +48,11 @@
                 {%endif%}
 
 
-                <td><button type="button" data-source="{{tasks.task_id}}">Edit</button></td>
+                <td>
+                    <form action="/update/{{tasks.task_id}}" method="post">
+                        <button type="button" data-source="{{tasks.task_id}}">Edit</button>
+                    </form>
+                </td>
 
                 <td>
                     <form action="/delete/{{tasks.task_id}}" method="post">

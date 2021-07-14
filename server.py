@@ -151,13 +151,9 @@ def delete_task(task_id):
     task_to_delete = Task.query.get(task_id)
     db.session.delete(task_to_delete)
     db.session.commit()
-    print(task_to_delete)
-    print("*"*10)	
+    # print(task_to_delete)
+    # print("*"*10)	
     return redirect('/tasks')
-    
- 
-#     print(project.tasks)
-#     print("*"*10)
 
     
 if __name__ == "__main__":
